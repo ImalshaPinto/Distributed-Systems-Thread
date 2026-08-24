@@ -2,8 +2,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class GameBoard {
-    // The assignment strictly requires a 2x3 array
-    private final char[][] board = new char[2][3];
+    private final char[][] board = new char[3][3];
     private char currentPlayerTurn = 'X'; // X always goes first
     private boolean isGameOver = false;
     
@@ -11,7 +10,7 @@ public class GameBoard {
 
     public GameBoard() {
         // Initialize board with empty slots represented by '-'
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 board[i][j] = '-';
             }
@@ -70,18 +69,20 @@ public class GameBoard {
         return isGameOver;
     }
 
-    // Basic Arbiter logic for a 2x3 board (3-in-a-row horizontally)
+    // Check rows, columns, and both diagonals for three matching symbols.
     private boolean checkWin(char player) {
-        for (int i = 0; i < 2; i++) {
-            if (board[i][0] == player && board[i][1] == player && board[i][2] == player) {
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == player && board[i][1] == player && board[i][2] == player
+                    || board[0][i] == player && board[1][i] == player && board[2][i] == player) {
                 return true;
             }
         }
-        return false;
+        return board[0][0] == player && board[1][1] == player && board[2][2] == player
+                || board[0][2] == player && board[1][1] == player && board[2][0] == player;
     }
 
     private boolean checkDraw() {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (board[i][j] == '-') return false; // Found an empty spot
             }
@@ -101,7 +102,7 @@ public class GameBoard {
         System.out.println("  ===================");
         
         // Loop through rows
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             System.out.print("    "); // Indent the board for better visibility
             // Loop through columns
             for (int j = 0; j < 3; j++) {
@@ -116,7 +117,7 @@ public class GameBoard {
             System.out.println(); // Move to the next line
             
             // Add horizontal separators between the two rows
-            if (i < 1) {
+            if (i < 2) {
                 System.out.println("   ---+---+---");
             }
         }

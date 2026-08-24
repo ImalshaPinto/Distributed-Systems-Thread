@@ -20,7 +20,7 @@ class Player implements Runnable {
         
         // Keep attempting moves until the Arbiter declares a win or draw
         while (!board.isGameOver()) {
-            int row = random.nextInt(2); // Random row: 0 or 1
+            int row = random.nextInt(3); // Random row: 0, 1, or 2
             int col = random.nextInt(3); // Random col: 0, 1, or 2
 
             // Attempt to make a move on the shared board
