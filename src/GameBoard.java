@@ -71,23 +71,7 @@ public class GameBoard {
     }
 
     // Basic Arbiter logic for a 2x3 board (3-in-a-row horizontally)
-    private boolean checkWin(char player) {
-        for (int i = 0; i < 2; i++) {
-            if (board[i][0] == player && board[i][1] == player && board[i][2] == player) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    private boolean checkDraw() {
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (board[i][j] == '-') return false; // Found an empty spot
-            }
-        }
-        return true;
-    }
 
     // Helper to fulfill the mandatory timestamp and Thread ID logging requirement
     private void logStatus(String message) {
